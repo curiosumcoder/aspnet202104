@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WA1._1
+namespace WA11
 {
     public static class MiddlewareExtensions
     {
