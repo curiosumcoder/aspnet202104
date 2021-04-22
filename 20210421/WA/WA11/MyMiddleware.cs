@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Primitives;
+using System;
 
 namespace WA11
 {
@@ -14,8 +15,9 @@ namespace WA11
         }
 
         public async Task Invoke(HttpContext context)
-        {
-            context.Response.Headers.Add("X-MyMiddleware", new StringValues("Have a nice day! :-)"));
+        {            
+            context.Response.Headers.Add("X-MyMiddleware", 
+                new StringValues($"Welcome at {DateTime.Now.ToString()}!"));
             await _next.Invoke(context);
         }
     }

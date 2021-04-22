@@ -28,6 +28,9 @@ namespace WA11
 
             app.UseRouting();
 
+            app.UseMyMiddleware();
+            //app.UseMiddleware<MyMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
