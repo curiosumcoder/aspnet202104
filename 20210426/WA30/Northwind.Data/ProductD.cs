@@ -1,7 +1,7 @@
 ﻿using Northwind.Model;
 using System.Collections.Generic;
 
-namespace Data
+namespace Northwind.Data
 {
     public class ProductD
     {

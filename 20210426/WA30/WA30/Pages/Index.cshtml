@@ -1,10 +1,12 @@
 ﻿@page
-@model IndexModel
+@model WA30.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<ul>
+    <li><a asp-page="ServerSide">Server side</a></li>
+    <li><a asp-page="ClientCSS">Client - CSS</a></li>
+    <li><a asp-page="ClientBootstrap">Client - Bootstrap</a></li>
+    <li><a asp-page="ClientAjax">Client - AJAX</a></li>
+    <li><a asp-page="ClientVue">Client - Vuejs</a></li>
+</ul>
