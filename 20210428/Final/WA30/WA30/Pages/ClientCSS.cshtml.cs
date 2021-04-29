@@ -24,7 +24,8 @@ namespace WA30.Pages
 
             // LINQ
             Products = pM.Where(p => p.ProductName.Contains(Filter ?? "",
-                System.StringComparison.InvariantCultureIgnoreCase)).GroupBy(p => p.CategoryName).ToList();
+                System.StringComparison.InvariantCultureIgnoreCase)).
+                GroupBy(p => p.CategoryName).ToList();
         }
     }
 }

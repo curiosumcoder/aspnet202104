@@ -6,7 +6,7 @@
 }
 
 section table:hover {
-    color: #8c25aa;
+    color: yellow;
     cursor: pointer;
 }
 
@@ -29,5 +29,5 @@ table.bordes tbody td {
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #e9bce1;
+    background-color: red;
 }
