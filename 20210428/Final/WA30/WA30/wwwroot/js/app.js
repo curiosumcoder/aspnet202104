@@ -1,8 +1,9 @@
-﻿let app = new Vue({
-    el: '#app',
-    data: {
-        filter: '',
-        items: []
+﻿const app = Vue.createApp({
+    data() {
+        return {
+            filter: '',
+            items: []
+        }
     },
     methods: {
         search: async function () {
@@ -30,9 +31,12 @@
             }, {});
 
             this.items = grouped;
+            console.log(grouped);
         }
     }
 });
+
+const vm = app.mount('#app');
 
 function noAsync() {
     fetch('js/index.json').then(
