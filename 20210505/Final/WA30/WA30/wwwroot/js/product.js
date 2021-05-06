@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let ps = new ProductService();
 
+        list.innerHTML = ''; // Limpiar el resultado original
+
         ps.getProducts().then((data) => {
             //console.log(data);
 

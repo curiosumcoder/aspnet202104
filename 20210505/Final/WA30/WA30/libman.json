@@ -7,8 +7,21 @@
       "destination": "wwwroot/lib/twitter-bootstrap/",
       "files": [
         "css/bootstrap.css",
-        "css/bootstrap.min.css"       
+        "css/bootstrap.min.css"
       ]
+    },
+    {
+      "library": "underscore.js@1.13.1",
+      "destination": "wwwroot/lib/underscore.js/",
+      "files": [
+        "underscore-min.js",
+        "underscore.js"
+      ]
+    },
+    {
+      "library": "vue@3.0.11",
+      "destination": "wwwroot/lib/vue",
+      "files": ["vue.global.js"]
     }
   ]
 }

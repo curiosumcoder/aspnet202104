@@ -1,0 +1,11 @@
+[
+  {
+    "outputFileName": "wwwroot/js/product.min.js",
+    "inputFiles": [
+      "wwwroot/js/product.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  }
+]
