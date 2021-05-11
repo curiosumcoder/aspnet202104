@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace CA41
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             using (var db = new NorthwindContext())
             {
@@ -12,8 +13,19 @@ namespace CA41
                 {
                     Console.WriteLine(p.ProductName);
                 }
+
+                var sales = await db.GetProcedures().SalesbyYearAsync(new DateTime(1990, 1, 1), DateTime.Today);
+
+                foreach (var s in sales)
+                {
+                    Console.WriteLine(s.OrderID);
+                }
             }
-            Console.WriteLine("Hello World!");
+
+
+
+            Console.WriteLine("READY!");
+            Console.ReadLine();
         }
     }
 }
