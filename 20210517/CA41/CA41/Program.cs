@@ -26,7 +26,7 @@ namespace CA41
             //LeerConfiguracion();
             //Basic();
             //CRUD();
-            //LINQToEntities();
+            LINQToEntities();
             //EagerLoading();
             //LazyLoading();
             //LINQDynamic();
@@ -246,7 +246,7 @@ namespace CA41
             // Agrupamiento
             using (NWContext db = new NWContext())
             {
-                var q7 = from c in db.Customers
+                var q7 = from c in db.Customers.ToList()
                          where c.Orders.Count() > 5
                          group c by c.Country into CustByCountry
                          select CustByCountry;
@@ -254,15 +254,15 @@ namespace CA41
                 var q7x = db.Customers.GroupBy(c => c.Country);
 
                 Console.Clear();
-                //foreach (var grupo in q7x)
-                //{
-                //    Console.WriteLine($"{grupo.Key}, {grupo.Count()}");
+                foreach (var grupo in q7)
+                {
+                    Console.WriteLine($"{grupo.Key}, {grupo.Count()}");
 
-                //    foreach (var c in grupo)
-                //    {
-                //        Console.WriteLine($"\t{c.ContactName}");
-                //    }
-                //}
+                    foreach (var c in grupo)
+                    {
+                        Console.WriteLine($"\t{c.ContactName}");
+                    }
+                }
 
                 var q7y = from c in db.Customers
                           group c by new { c.Country, c.City } into CountryCity
@@ -275,7 +275,7 @@ namespace CA41
                               Items = CountryCity
                           };
 
-                var q7y2 = db.Customers.GroupBy(c => new { c.Country, c.City }).
+                var q7y2 = db.Customers.ToList().GroupBy(c => new { c.Country, c.City }).
                     Where(g => g.Count() > 1).
                     Select(g => new
                     {
@@ -286,15 +286,15 @@ namespace CA41
                     });
 
                 Console.Clear();
-                //foreach (var item in q7y)
-                //{
-                //    Console.WriteLine($"{item.Country}, {item.City}, {item.Count}");
+                foreach (var item in q7y2)
+                {
+                    Console.WriteLine($"{item.Country}, {item.City}, {item.Count}");
 
-                //    foreach (var c in item.Items)
-                //    {
-                //        Console.WriteLine($"\t{c.ContactName}");
-                //    }
-                //}
+                    foreach (var c in item.Items)
+                    {
+                        Console.WriteLine($"\t{c.ContactName}");
+                    }
+                }
             }
 
             // Join
@@ -642,7 +642,7 @@ namespace CA41
             }
 
             var tso = new TransactionOptions();
-            tso.IsolationLevel = IsolationLevel.ReadUncommitted;
+            tso.IsolationLevel = System.Transactions.IsolationLevel.ReadUncommitted;
            
             using (var ts = new TransactionScope(TransactionScopeOption.Required, tso))
             {
