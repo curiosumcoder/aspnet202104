@@ -1,22 +1,17 @@
-﻿@using Northwind.Model
-@model List<Product>
+﻿@model WA50.ViewModels.HomeIndexViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <form method="post">
-    <input type="search" placeholder="Digite aquí" name="filter" />
+    <input asp-for="Filter" placeholder="Digite aquí" />
 </form>
 
 @{
-    //var products = (List<Product>)ViewData["products"];
-    //var products = (List<Product>)ViewBag.products;
-    var products = Model;
-
-    if (products != null && products.Count > 0)
+    if (Model != null && Model.Products != null && Model.Products.Count > 0)
     {
         <ul>
-            @foreach (var p in products)
+            @foreach (var p in Model.Products)
             {
                 <li>@p.ProductName</li>
             }
