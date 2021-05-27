@@ -1,0 +1,20 @@
+﻿@model WA50.ViewModels.HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form method="post">
+    <input asp-for="Filter" placeholder="Digite aquí" />
+</form>
+
+@{
+    if (Model != null && Model.Products != null && Model.Products.Count > 0)
+    {
+        <ul>
+            @foreach (var p in Model.Products)
+            {
+                <li>@p.ProductName</li>
+            }
+        </ul>
+    }
+}

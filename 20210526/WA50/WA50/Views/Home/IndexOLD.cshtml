@@ -1,0 +1,25 @@
+﻿@using Northwind.Model
+@model List<Product>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form method="post">
+    <input type="search" placeholder="Digite aquí" name="filter" />
+</form>
+
+@{
+    //var products = (List<Product>)ViewData["products"];
+    //var products = (List<Product>)ViewBag.products;
+    var products = Model;
+
+    if (products != null && products.Count > 0)
+    {
+        <ul>
+            @foreach (var p in products)
+            {
+                <li>@p.ProductName</li>
+            }
+        </ul>
+    }
+}
