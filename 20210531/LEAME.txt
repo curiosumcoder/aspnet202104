@@ -1,3 +1,6 @@
+0. Verificar la instalación del comando EF
+* dotnet tool install --global dotnet-ef
+
 1. Quitar la migración
 
 * dotnet ef migrations remove -c ApplicationDbContext			
