@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles ="Admin, Conta")]
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

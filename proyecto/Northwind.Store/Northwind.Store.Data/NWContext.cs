@@ -9,9 +9,9 @@ namespace Northwind.Store.Data
 {
     public partial class NWContext : DbContext
     {
-        public NWContext()
-        {
-        }
+        //public NWContext()
+        //{
+        //}
 
         public NWContext(DbContextOptions<NWContext> options)
             : base(options)
@@ -50,12 +50,15 @@ namespace Northwind.Store.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            if (optionsBuilder != null && !optionsBuilder.IsConfigured)
+            {
+                var builder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-            IConfigurationRoot configuration = builder.Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("NW"));
+                IConfigurationRoot configuration = builder.Build();
+                optionsBuilder.UseSqlServer(configuration.GetConnectionString("NW"));
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

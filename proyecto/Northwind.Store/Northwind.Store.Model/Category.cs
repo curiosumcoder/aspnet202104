@@ -11,10 +11,11 @@ namespace Northwind.Store.Model
         {
             Products = new HashSet<Product>();
         }
-
+        
         [Key]
         [Column("CategoryID")]
         public int CategoryId { get; set; }
+
         [Required]
         [StringLength(15)]
         public string CategoryName { get; set; }
