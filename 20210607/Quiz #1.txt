@@ -10,7 +10,7 @@ Materiales: Se entrega script para crear la tabla ToDo. Se recomienda crear
 una base de datos nueva.
 
 	CREATE TABLE [ToDo](
-		[Id] [int] IDENTITY(1,1) NOT NULL,
+		[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 		[Title] [nvarchar](50) NOT NULL,
 		[Due] [date] NULL
 	) 
