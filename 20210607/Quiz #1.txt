@@ -24,12 +24,13 @@ Ejercicios.
 2. 	Crear dentro de la aplicación recien creada la clase de contexto y
 	modelos necesarios para la conexión a base de datos y dar mantenimiento a 
 	datos de la tabla ToDo, todo ello haciendo uso del Entity Framework Core.
+	Puede dejar el código resultante en la carpeta Models.  (-o Models)
 	
 ## Valor: 2 puntos.
 
 3. 	Crear un nuevo controlador con el nombre ToDo que cuente con las acciones
-	y la vistas necesarias para poder hacer el mantenimiento de datos de la tabla
-	ToDo.
+	y la vistas necesarias para poder hacer el mantenimiento de datos (CRUD) de 
+	la tabla ToDo.
 ## Valor: 2 puntos.
 
 4. 	Modificar el menú pricipal de la aplicación para agregar un nuevo
@@ -42,6 +43,8 @@ Ejercicios.
 	para que la lista de ToDo's sea paginada por cada 4 elementos.
 
 	Se debe ofrecer en la vista la posibilidad de navegar entre páginas.
+	
+	1, 2, 3, 4, ... (.Take, .Skip)
 
 	Al ingregar a la acción Index la primera vez se obtiene al menos la primera 
 	págida de datos existentes.
