@@ -35,7 +35,20 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.Picture)*@
+                @*@{ 
+                    var imgBase64 = "";
+                    if (item.Picture != null)
+                    {
+                        using (var ms = new System.IO.MemoryStream(item.Picture))
+                        {
+                            imgBase64 = $"data:image/png;base64," +
+                            $"{Convert.ToBase64String(ms.ToArray())}";
+                        }
+                    }
+                }
+                <img src="@imgBase64" alt="Imagen" />*@
+                <img src="@Url.Action("ReadImage", new { id = item.CategoryId })" 
+                     alt="Imagen de @item.CategoryName" />
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CategoryId">Edit</a> |
