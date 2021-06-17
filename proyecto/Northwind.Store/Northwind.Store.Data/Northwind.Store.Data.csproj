@@ -13,10 +13,12 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Northwind.Store.Model\Northwind.Store.Model.csproj" />
+    <ProjectReference Include="..\Northwind.Store.Notification\Northwind.Store.Notification.csproj" />
   </ItemGroup>
 
 </Project>
