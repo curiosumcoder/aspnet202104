@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Northwind.Store.Data;
 using System;
@@ -46,7 +47,7 @@ namespace WA70.Controllers
 
             var starTime = HttpContext.Items["StartTime"];
 
-            return View(_db.Products.ToList());
+            return View(_db.Products.Include(p => p.Category).ToList());
         }
 
         public IActionResult Privacy()
