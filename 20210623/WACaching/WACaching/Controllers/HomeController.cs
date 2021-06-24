@@ -206,8 +206,11 @@ namespace WACaching.Controllers
             return View();
         }
 
-        //[ResponseCache(Duration = 10, Location = ResponseCacheLocation.Client, VaryByQueryKeys = new string[] {"param1"})]
-        //[ResponseCache(CacheProfileName = "Basic")]
+        //[ResponseCache(Duration = 10,Location = ResponseCacheLocation.Client)]
+        //[ResponseCache(Duration = 10,
+        //    Location = ResponseCacheLocation.Client,
+        //    VaryByQueryKeys = new string[] { "param1" })]
+        [ResponseCache(CacheProfileName = "Basic")]
         public IActionResult Privacy()
         {
             return View();
