@@ -12,6 +12,24 @@ Microsoft.VisualStudio.Web.CodeGeneration.Utils
 Microsoft.EntityFrameworkCore.Design
 
 ----------------------------------------------------------------------------------------------------------------------------
+
+        // GET: api/Product/Search
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(IEnumerable<Product>), StatusCodes.Status200OK)]
+        [HttpGet("Search/{filter}")]
+        public async Task<ActionResult<IEnumerable<Product>>> SearchProduct(string filter)
+        {
+            var products = await _context.Products.Where(p => p.ProductName.Contains(filter)).ToListAsync();
+
+            if (products == null)
+            {
+                return NotFound();
+            }
+
+            return products;
+        }
+
+----------------------------------------------------------------------------------------------------------------------------
 OpenAPI
 https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-5.0
 
