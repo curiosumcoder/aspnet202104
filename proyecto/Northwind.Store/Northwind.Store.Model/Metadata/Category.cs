@@ -16,7 +16,6 @@ namespace Northwind.Store.Model
         [NotMapped]
         public string PictureBase64 { get; set; }
 
-
         public partial class CategoryMetadata
         {
             [Display(Name = "Nombre de categoría")]

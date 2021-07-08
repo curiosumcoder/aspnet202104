@@ -30,6 +30,9 @@ namespace Northwind.Store.Model
         public short? UnitsOnOrder { get; set; }
         public short? ReorderLevel { get; set; }
         public bool Discontinued { get; set; }
+        
+        [Column(TypeName = "image")]
+        public byte[] Image { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
         [InverseProperty(nameof(Model.Category.Products))]
