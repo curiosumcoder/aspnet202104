@@ -57,6 +57,12 @@ namespace Northwind.Store.UI.Web.Intranet
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //app.UseStatusCodePages();
+            //app.UseStatusCodePagesWithRedirects("/Home/ErrorWithCode?code={0}");
+            app.UseStatusCodePagesWithRedirects("/ErrorStatus.html?code={0}");
+            //app.UseStatusCodePagesWithReExecute("/Home/ErrorWithCode", "?code={0}");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
