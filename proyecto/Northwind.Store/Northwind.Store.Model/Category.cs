@@ -23,7 +23,7 @@ namespace Northwind.Store.Model
         public string Description { get; set; }
 
         [Column(TypeName = "image")]
-        public byte[] Picture { get; set; }
+        public [] byte Picture { get; set; }
 
         [InverseProperty("Category")]
         public virtual ICollection<Product> Products { get; set; }
