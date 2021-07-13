@@ -21,7 +21,8 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
 
         public IActionResult Index()
         {
-            //throw new ApplicationException("¡Esta es una excepción!");
+            _logger.LogTrace("Inicio de Home.Index ...");
+            throw new ApplicationException("¡Esta es una excepción!");
             //return NotFound();
             //return Forbid();
 
@@ -36,6 +37,7 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            _logger.LogTrace("Inicio de Home.Error ...");
             //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 
             var requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
