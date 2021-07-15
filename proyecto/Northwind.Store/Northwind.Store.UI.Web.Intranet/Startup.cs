@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,8 +38,34 @@ namespace Northwind.Store.UI.Web.Intranet
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            #region Autorización
+            //services.AddAuthorization();
+            //services.AddAuthorization();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EmployeeOnly", 
+                policy => policy.RequireClaim("EmployeeNumber"));
+
+                options.AddPolicy("ElevatedRights", policy =>
+					policy.RequireRole("Admin","Manager"));
+
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+
+            // services.AddAuthorization(options =>
+            // {
+            //     options.AddPolicy("MayorDeEdad", policy =>
+            //         policy.Requirements.Add(new Auth.MinimumAgeRequirement(18)));
+            // });
+
+            //services.AddSingleton<IAuthorizationHandler, Auth.MinimumAgeHandler>();
+            #endregion
 
             services.AddTransient<IRepository<Category, int>, BaseRepository<Category, int>>();
             services.AddTransient<CategoryRepository>();

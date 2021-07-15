@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Northwind.Store.UI.Web.Intranet.Controllers
 {
@@ -22,13 +23,14 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
         public IActionResult Index()
         {
             _logger.LogTrace("Inicio de Home.Index ...");
-            throw new ApplicationException("¡Esta es una excepción!");
+            //throw new ApplicationException("¡Esta es una excepción!");
             //return NotFound();
             //return Forbid();
 
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
