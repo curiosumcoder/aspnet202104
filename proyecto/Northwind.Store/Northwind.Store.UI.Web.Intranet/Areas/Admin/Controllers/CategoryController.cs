@@ -15,10 +15,10 @@ using Northwind.Store.Notification;
 namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    //[Authorize]
+    [Authorize]
     //[Authorize(Roles = "Admin")]
-    [Authorize(Policy = "EmployeeOnly")]
-    [Authorize(Policy = "ElevatedRights")]
+    //[Authorize(Policy = "EmployeeOnly")]
+    //[Authorize(Policy = "ElevatedRights")]
     //[Authorize(Policy = "MayorDeEdad")]
     public class CategoryController : Controller
     {
