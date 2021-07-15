@@ -22,7 +22,7 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
     //[Authorize(Policy = "MayorDeEdad")]
     public class CategoryController : Controller
     {
-        private readonly Notifications ns = new Notifications();
+        private readonly Notifications ns = new();
 
         private readonly NWContext _context;
         private readonly IRepository<Category, int> _cR;
@@ -85,11 +85,9 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
                 if (picture != null)
                 {
                     // using System.IO;
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        picture.CopyTo(ms);
-                        category.Picture = ms.ToArray();
-                    }
+                    using MemoryStream ms = new();
+                    picture.CopyTo(ms);
+                    category.Picture = ms.ToArray();
                 }
 
                 //_context.Add(category);

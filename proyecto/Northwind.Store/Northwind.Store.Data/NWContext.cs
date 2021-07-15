@@ -247,7 +247,7 @@ namespace Northwind.Store.Data
                     .HasDatabaseName("ShippersOrders");
 
                 entity.HasIndex(e => e.ShippedDate)
-                    .HasName("ShippedDate");
+                    .HasDatabaseName("ShippedDate");
 
                 entity.Property(e => e.CustomerId).IsFixedLength();
 

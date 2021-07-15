@@ -73,14 +73,11 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
         public IActionResult ErrorWithCode(string code)
         {
             var requestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
-            var errorStatusCode = code;
-            var originalURL = "";
-
             var statusCodeReExecuteFeature = HttpContext.Features.Get<IStatusCodeReExecuteFeature>();
 
             if (statusCodeReExecuteFeature != null)
             {
-                originalURL =
+                _ =
                     statusCodeReExecuteFeature.OriginalPathBase
                     + statusCodeReExecuteFeature.OriginalPath
                     + statusCodeReExecuteFeature.OriginalQueryString;
