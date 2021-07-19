@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Northwind.Store.Data;
 using Northwind.Store.Model;
+using Northwind.Store.UI.Web.Intranet.Auth;
 using Northwind.Store.UI.Web.Intranet.Data;
 using System;
 using System.Collections.Generic;
@@ -47,24 +48,33 @@ namespace Northwind.Store.UI.Web.Intranet
             //services.AddAuthorization();
             services.AddAuthorization(options =>
             {
+                // Uso de requerimiento y su manejador correspondiente
+                // se requiere de services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
+                options.AddPolicy("ManagerPolicy", policy =>
+                    policy.Requirements.Add(new OrderRequirement()));
+
+                // Uso de requerimiento y su manejador correspondiente
+                // se requiere de services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+                options.AddPolicy("MayorDeEdad", policy =>
+                    policy.Requirements.Add(new MinimumAgeRequirement(18)));
+
+                // Política que requiere del claim (EmployeeNumber)
                 options.AddPolicy("EmployeeOnly", 
                 policy => policy.RequireClaim("EmployeeNumber"));
 
+                // Política que requiere de roles
                 options.AddPolicy("ElevatedRights", policy =>
 					policy.RequireRole("Admin","Manager"));
 
+                // Requerir autenticación para toda la aplicación
                 options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
             });
-
-            // services.AddAuthorization(options =>
-            // {
-            //     options.AddPolicy("MayorDeEdad", policy =>
-            //         policy.Requirements.Add(new Auth.MinimumAgeRequirement(18)));
-            // });
-
-            //services.AddSingleton<IAuthorizationHandler, Auth.MinimumAgeHandler>();
+                       
+            services.AddTransient<IAuthorizationHandler, MinimumAgeHandler>();
+            services.AddTransient<IAuthorizationHandler, OrderAuthorizationHandler>();
+            services.AddTransient<IAuthorizationHandler, OrderAuthorizationCrudHandler>();
             #endregion
 
             services.AddTransient<IRepository<Category, int>, BaseRepository<Category, int>>();

@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Northwind.Store.UI.Web.Intranet.Auth;
 
 namespace Northwind.Store.UI.Web.Intranet.Controllers
 {
@@ -16,12 +18,14 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
         private readonly ILogger<DemoController> _logger;
         private readonly RoleManager<IdentityRole> _rm;
         private readonly UserManager<IdentityUser> _um;
+        private readonly IAuthorizationService _ase;
 
-        public DemoController(ILogger<DemoController> logger, RoleManager<IdentityRole> rm, UserManager<IdentityUser> um)
+        public DemoController(ILogger<DemoController> logger, RoleManager<IdentityRole> rm, UserManager<IdentityUser> um, IAuthorizationService ase)
         {
             _logger = logger;
             _rm = rm;
             _um = um;
+            _ase = ase;
         }
 
         /// <summary>
@@ -68,7 +72,7 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
 
         /// <summary>
         /// Permite agregar un usuario a un rol específico.
-        /// https://localhost:5001/Demo/AddToRol?username=gbermude@outlook.com&roleName=Admin
+        /// https://localhost:44395/Demo/AddToRol?username=gbermude@outlook.com&roleName=Admin
         /// </summary>
         public async Task<IActionResult> AddToRol(string userName, string roleName)
         {
@@ -89,8 +93,8 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
 
         /// <summary>
         /// Permite agregar un usuario a un rol específico.
-        /// https://localhost:5001/Demo/AddClaimToUser?username=gbermude@outlook.com&claimType=DateOfBirth&claimValue=19/09/1977
-        /// https://localhost:5001/Demo/AddClaimToUser?username=gbermude@outlook.com&claimType=http://schemas.xmlsoap.org/ws/2005/05/identity/claims/dateofbirth&claimValue=19/09/1977
+        /// https://localhost:44395/Demo/AddClaimToUser?username=gbermude@outlook.com&claimType=DateOfBirth&claimValue=19/09/1977
+        /// https://localhost:44395/Demo/AddClaimToUser?username=gbermude@outlook.com&claimType=http://schemas.xmlsoap.org/ws/2005/05/identity/claims/dateofbirth&claimValue=19/09/1977
         /// </summary>
         public async Task<IActionResult> AddClaimToUser(string userName, string claimType, string claimValue)
         {
@@ -102,6 +106,7 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
                 // Se asigna el claim al usuario
 
                 var claim = new Claim(claimType, claimValue);
+
                 var result = await _um.AddClaimAsync(user, claim);
 
                 if (result.Succeeded)
@@ -114,6 +119,33 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
                     }
 #endif
                 }
+            }
+
+            return View("Index");
+        }
+
+        /// <summary>
+        /// Autenticación basado en recursos.
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IActionResult> Resource()
+        {
+            var orden = new Model.Order();
+            orden.OrderDetails.Add(new Model.OrderDetail() { ProductId = 1, UnitPrice = 20, Quantity = 10 });
+            orden.OrderDetails.Add(new Model.OrderDetail() { ProductId = 2, UnitPrice = 100, Quantity = 100 });
+
+            // Confirmar que el usuario tienen autorización para usar la orden con cierto monto
+            var r1 = await _ase.AuthorizeAsync(User, orden, "ManagerPolicy");
+            if (!r1.Succeeded)
+            {
+                return new ForbidResult();
+            }
+
+            // Confirmar que el usuario tienen autorización para registrar la orden
+            var r2 = await _ase.AuthorizeAsync(User, orden, Operations.Create);
+            if (!r2.Succeeded)
+            {
+                return new ForbidResult();
             }
 
             return View("Index");

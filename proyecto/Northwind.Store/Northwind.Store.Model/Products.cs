@@ -32,8 +32,9 @@ namespace Northwind.Store.Model
         public bool Discontinued { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
-        [InverseProperty(nameof(Categories.Products))]
-        public virtual Categories Category { get; set; }
+        [InverseProperty(nameof(Products))]
+        public virtual Category Category { get; set; }
+
         [ForeignKey(nameof(SupplierId))]
         [InverseProperty(nameof(Suppliers.Products))]
         public virtual Suppliers Supplier { get; set; }
