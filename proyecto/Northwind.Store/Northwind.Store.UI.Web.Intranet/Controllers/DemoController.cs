@@ -132,7 +132,7 @@ namespace Northwind.Store.UI.Web.Intranet.Controllers
         {
             var orden = new Model.Order();
             orden.OrderDetails.Add(new Model.OrderDetail() { ProductId = 1, UnitPrice = 20, Quantity = 10 });
-            orden.OrderDetails.Add(new Model.OrderDetail() { ProductId = 2, UnitPrice = 100, Quantity = 100 });
+            //orden.OrderDetails.Add(new Model.OrderDetail() { ProductId = 2, UnitPrice = 100, Quantity = 100 });
 
             // Confirmar que el usuario tienen autorización para usar la orden con cierto monto
             var r1 = await _ase.AuthorizeAsync(User, orden, "ManagerPolicy");

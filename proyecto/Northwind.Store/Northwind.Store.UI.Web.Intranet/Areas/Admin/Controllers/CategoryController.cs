@@ -19,7 +19,7 @@ namespace Northwind.Store.UI.Web.Intranet.Areas.Admin.Controllers
     //[Authorize(Roles = "Admin")]
     //[Authorize(Policy = "EmployeeOnly")]
     //[Authorize(Policy = "ElevatedRights")]
-    [Authorize(Policy = "MayorDeEdad")]
+    //[Authorize(Policy = "MayorDeEdad")]
     public class CategoryController : Controller
     {
         private readonly Notifications ns = new();
